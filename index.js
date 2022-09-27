@@ -1,10 +1,10 @@
 const section = document.querySelector("section");
-const attemptsCount = document.querySelector(".attempts");
+const attemptsText = document.querySelector(".attempts");
 const resetBtn = document.getElementById("button");
 let attempts = 0;
 let currentScore = 0;
 
-attemptsCount.textContent = `Attempts: ${attempts}`;
+attemptsText.textContent = `Attempts: ${attempts}`;
 
 const getData = () => [
   { imgSrc: "./images/baseball.jpg", name: "baseball" },
@@ -71,22 +71,18 @@ const checkCards = (e) => {
         setTimeout(() => card.classList.remove("toggle-card"), 1000);
       });
       attempts++;
-      setTimeout(
-        () => (attemptsCount.textContent = `Attempts: ${attempts}`),
-        1000
-      );
+      attemptsText.textContent = `Attempts: ${attempts}`;
     }
   }
   const toggleCards = document.querySelectorAll(".toggle-card");
   if (toggleCards.length === 16) {
     currentScore = attempts;
     restart();
-    attemptsCount.textContent = `You won with ${currentScore} attempts`;
+    attemptsText.textContent = `You won with ${currentScore} attempts`;
   }
 };
 
 const restart = () => {
-  attemptsCount.textContent = `Attempts${attempts}`;
   section.style.pointerEvents = "none";
   let cardData = randomizeData();
   let cards = document.querySelectorAll(".card");
@@ -98,7 +94,7 @@ const restart = () => {
     setTimeout(() => (faces[index].src = card.imgSrc), 1000);
   });
   attempts = 0;
-  attemptsCount.textContent = attempts;
+  attemptsText.textContent = `Attempts: ${attempts}`;
   setTimeout(() => (section.style.pointerEvents = "all"), 1000);
 };
 
